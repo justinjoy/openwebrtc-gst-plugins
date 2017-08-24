@@ -198,7 +198,9 @@ static void gst_sctp_association_finalize(GObject *object)
     }
     G_UNLOCK(associations_lock);
 
-    g_thread_join(self->connection_thread);
+    if (self->connection_thread != NULL) {
+      g_thread_join(self->connection_thread);
+    }
 
     G_OBJECT_CLASS(gst_sctp_association_parent_class)->finalize(object);
 }
